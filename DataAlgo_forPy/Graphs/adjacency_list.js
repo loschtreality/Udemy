@@ -32,9 +32,7 @@ class Graph {
       let index = 0
       return {
         next: () => {
-          console.log("VLK[index] :", vertListKeys[index])
           let value = Reflect.get(this.vertList, vertListKeys[index])
-          console.log(value, "value")
           index++
           return {
             done: index > vertListKeys.length ? true : false,
@@ -46,21 +44,14 @@ class Graph {
 
     // Iterate through vertList values
   each(callback) {
-      for (vertex of this) {
+      for (let vertex of this) {
         callback(vertex)
       }
     }
 
-  contains(target) {
-      let result = null
-      for (vertex of this) {
-        if (vertex === target) {
-          result = vertex
-          break
-        }
-      }
-      return result;
-    }
+  contains(vertex) {
+    return Reflect.get(this.vertList, vertex)
+  }
 
   addVertex(key) {
       const newVertex = new Vertex(key)
@@ -90,10 +81,6 @@ class Graph {
 
   getVerticies() {
     return Reflect.ownKeys(this.vertList)
-  }
-
-  contains(vertex) {
-    return Reflect.get(this.vertList, vertex)
   }
 
 }
