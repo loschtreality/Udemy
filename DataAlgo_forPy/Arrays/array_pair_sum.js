@@ -10,25 +10,25 @@
 
 
 const pair_sum = (array, target) => {
-  array = array.sort((a,b) => a - b)
 
-  const pairs = []
-  const pair_set = new Set()
+  if (array.length < 2) return null
 
-  for (var i = 0; i < array.length - 1; i++) {
-    for (var j = i + 1; j < array.length; j++) {
-      let sum = array[i] + array[j]
-      let pair_string = `${array[i]},${array[j]}`
-      if (sum === target && !pair_set.has(pair_string)) {
-        pair_set.add(pair_string)
-        pairs.push([array[i], array[j]])
-      }
+  const seen = new Set()
+  const output = []
+
+  array.forEach((num) => {
+    let difference = target - num
+
+    if (!seen.has(difference)) {
+      seen.add(num)
+    } else {
+      output.push( [Math.min(num, difference), Math.min(num, difference)] )
     }
-  }
-  
-  return pairs
+  })
+
+  return output.length
 }
 
-console.log(pair_sum([1,9,2,8,3,7,4,6,5,5,13,14,11,13,-1],10).length === 6)
-console.log(pair_sum([1,2,3,1],3).length === 1)
-console.log(pair_sum([1,3,2,2],4).length === 2)
+console.log(pair_sum([1,9,2,8,3,7,4,6,5,5,13,14,11,13,-1],10) === 6)
+console.log(pair_sum([1,2,3,1],3) === 1)
+console.log(pair_sum([1,3,2,2],4) === 2)
