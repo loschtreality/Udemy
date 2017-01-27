@@ -8,11 +8,7 @@
 // Your function will accept a number n and return the nth number of the fibonacci sequence
 
 const recursive_fib = (number) => {
-  if (number <= 1) {
-    return 1
-  } else if (number === 2) {
-    return 1
-  }
+  if (number <= 2) { return 1 }
 
   return recursive_fib(number - 1) + recursive_fib(number - 2)
 }
@@ -20,22 +16,33 @@ const recursive_fib = (number) => {
 // console.log(recursive_fib(10)) // 55
 
 
+// const iterative_fib = (number) => {
+//   let fib_sum = 0
+//   let prev = 0
+//   let next = 1
+//
+//   while (number >= 0) {
+//     fib_sum += next
+//     prev = next
+//     next = fib_sum + prev
+//     number -= 2
+//   }
+//
+//   return fib_sum
+// }
+
 const iterative_fib = (number) => {
   let fib_sum = 0
-  let prev = 0
-  let next = 1
+  let fib_next = 1
 
-  while (number >= 0) {
-    fib_sum += next
-    prev = next
-    next = fib_sum + prev
-    number -= 2
+  for (let i = 0; i < number; i++) {
+    [fib_sum, fib_next] = [fib_next, fib_sum + fib_next]
   }
 
   return fib_sum
 }
 
-// console.log(iterative_fib(10)) // 55
+console.log(iterative_fib(10)) // 55
 
 const dynamic_fib = (number) => {
   const cache = {}
@@ -61,4 +68,4 @@ const dynamic_fib = (number) => {
   return next
 }
 
-console.log(dynamic_fib(10)) // 55
+// console.log(dynamic_fib(10)) // 55
