@@ -1,4 +1,4 @@
-class BinHeap
+class BinaryHeap
 
   def initialize
     @heapList = [0]
