@@ -5,33 +5,35 @@ class BinaryHeap
     @currentSize = 0
   end
 
-  def percUp(i)
-    while (i / 2) > 0
-      if self.heapList[i] < self.heapList[(i/2)]
-        temp = self.heapList[(i/2)]
-        self.heapList[(i/2)] = self.heapList[i]
-        self.heapList[i] = temp
+  def percUp(index)
+    while (index / 2) > 0
+      parentIndex = index / 2
+      childElement = @heapList[index]
+      parentElement = @heapList[parentIndex]
+      if childElement < parentElement
+        # must switch by referencing instace var (@) or local variables will be switched
+        @heapList[parentIndex], @heapList[index] = @heapList[index], @heapList[parentIndex]
       end
-      i = (i / 2)
+      index /= 2
     end
   end
 
   def percDown(i)
-    while (i * 2) <= self.currentSize
+    while (i * 2) <= @currentSize
       mc = self.minChild(i)
-      if self.heapList[i] > self.heapList[mc]
-        temp = self.heapList[i]
-        self.heapList[i] = self.heapList[mc]
-        self.heapList[mc] = temp
+      if @heapList[i] > @heapList[mc]
+        temp = @heapList[i]
+        @heapList[i] = @heapList[mc]
+        @heapList[mc] = temp
       end
       i = mc
     end
   end
 
   def minChild(i)
-    if (i * 2) + 1 > self.currentSize
+    if (i * 2) + 1 > @currentSize
       return i * 2
-    elsif self.heapList[(i * 2)] < self.heapList[(i*2)+1]
+    elsif @heapList[(i * 2)] < @heapList[(i*2)+1]
       return i * 2
     else
       return (i * 2) + 1
@@ -39,24 +41,24 @@ class BinaryHeap
   end
 
   def insert(k)
-    self.heapList.push(k)
-    self.currentSize += 1
-    self.percUp(self.currentSize)
+    @heapList.push(k)
+    @currentSize += 1
+    self.percUp(@currentSize)
   end
 
   def delMin
-    retval = self.heapList[1]
-    self.heapList[1] = self.heapList[self.currentSize]
-    self.currentSize = self.currentSize - 1
-    self.heapList.pop
+    retval = @heapList[1]
+    @heapList[1] = @heapList[@currentSize]
+    @currentSize = @currentSize - 1
+    @heapList.pop
     self.percDown(1)
     retval
   end
 
   def buildHeap(alist)
     i = alist.size
-    self.currentSize = alist.size
-    self.heapList #=  [0] + alist[:]
+    @currentSize = alist.size
+    @heapList = [0] + alist.dup
     while (i > 0)
       self.percDown(i)
       i -= 1
@@ -64,3 +66,15 @@ class BinaryHeap
   end
 
 end
+
+tree = BinaryHeap.new
+tree.insert(5)
+tree.insert(10)
+tree.insert(3)
+tree.insert(1)
+tree.insert(7)
+tree.insert(21)
+tree.insert(8)
+tree.insert(9)
+
+p tree
