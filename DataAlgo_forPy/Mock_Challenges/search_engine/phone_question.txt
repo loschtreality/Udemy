@@ -1,0 +1,21 @@
+This question must be completed without syntax highlighting or running the code through the editor
+
+Question: Write a function that compoutes the Nth fibonacci number
+
+const nth_fib = (n) => {
+   let prev = 0 
+   let current = 1
+   let last = 0
+   
+    while (n > 0) {
+        last = prev
+        prev += current
+        current += last
+        
+        n--
+    }
+
+    return prev
+}
+
+
