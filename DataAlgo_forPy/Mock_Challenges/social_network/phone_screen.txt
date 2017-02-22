@@ -1,0 +1,20 @@
+Remove duplicate characters in a given string keeping only the first occurrences.
+For example, if the input is 'tree traversal' the output will be 'tre avsl'
+
+# Ruby
+
+require 'set'
+
+def filter_occurances(string)
+  seen_letters = Set.new()
+  string = string.split('').map do |char|
+    unless seen_letters.includes?(char)
+      seen_letters.add(char)
+      return char
+    else
+      return ''
+    end
+  end
+
+  string.join('')
+end
