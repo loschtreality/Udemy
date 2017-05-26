@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>Hobbies {{ hobbyCount }}</p>
+    <ul>
+      <vli
+       v-for="hobby, index in hobbies"
+       v-bind:hobby="hobby"
+       v-bind:key="index"
+       v-bind:style="{backgroundColor: getColor(index)}"
+       v-on:removeitem="removeLI($event)"
+       >
+      </vli>
+    </ul>
+    <input v-model="hobbyInput" type="text" name="hobbs">
+    <button
+      v-on:click="addHobby(hobbyInput)"
+      type="button"
+      name="button"
+    >Add hobby</button>
+    <p v-if="hobbyDeleted">Hobby deleted!</p>
+  </div>
+</body>
+<script src="app.js"></script>
+
+</html>
