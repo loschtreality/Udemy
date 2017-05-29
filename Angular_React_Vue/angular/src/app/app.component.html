@@ -1,0 +1,12 @@
+<h3>My Hobbies</h3>
+<p [ngClass]="{updated: hobbies.length > 3}">Hobby count: {{ hobbies.length }}</p>
+<ul>
+  <app-hobbyli
+   *ngFor="let hobby of hobbies"
+   [hobby]="hobby"
+   (hobbyClicked)="removeHobby($event)"
+  ></app-hobbyli>
+</ul>
+<input type="text" [(ngModel)]="newHobby">
+<button (click)="addHobby(newHobby)" type="button">Add Hobby</button>
+<p *ngIf="hobbyDeleted">Hobby was deleted!</p>
